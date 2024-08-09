@@ -11,7 +11,7 @@
     ];
 
   # luks setup
-  boot.initrd.luks.devices.crypted.device = "dev/nvme0n1p4" ;
+  boot.initrd.luks.devices.crypted.device = "/dev/nvme0n1p4" ;
   boot.loader.grub.enableCryptodisk = true ;
 
   # Use the GRUB bootloader
