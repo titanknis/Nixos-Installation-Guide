@@ -12,7 +12,7 @@
 
   # luks setup
   boot.initrd.luks.devices.crypted.device = "/dev/nvme0n1p4" ;
-  boot.loader.grub.enableCryptodisk = true ;
+  boot.loader.grub.enableCryptodisk = true ; # Enable GRUB support for encrypted disks
 
   # Use the GRUB bootloader
   boot.loader.grub.enable = true;  # Enable GRUB as the bootloader
