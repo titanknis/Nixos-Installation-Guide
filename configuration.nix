@@ -75,21 +75,21 @@
   };
 
   # Enable the KDE Plasma desktop environment
-  services.desktopManager.plasma6.enable = true;
+  #services.desktopManager.plasma6.enable = true;
 
   # Enable Wayland for KDE Plasma
   # services.xserver.windowManager.plasma6.enableWayland = true;
 
   # Enable the SDDM display manager
-  services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "plasma";  # Set the default session to Plasma Wayland
+  #services.displayManager.sddm.enable = true;
+  #services.displayManager.defaultSession = "plasma";  # Set the default session to Plasma Wayland
   # services.displayManager.autoLogin.enable = true;  # Enable auto-login (commented out)
   # services.displayManager.autoLogin.user = "alice";  # Set the auto-login user to 'alice' (commented out)
 
   # Set GTK/Qt themes
-  qt.enable = true;                 # Enable Qt integration
-  qt.platformTheme = "gtk2";        # Set the platform theme to GTK2
-  qt.style = "gtk2";                # Set the style to GTK2
+  #qt.enable = true;                 # Enable Qt integration
+  #qt.platformTheme = "gtk2";        # Set the platform theme to GTK2
+  #qt.style = "gtk2";                # Set the style to GTK2
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -127,12 +127,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    firefox # favorite browser
+    #firefox # favorite browser
+    #kitty 
     neovim # editor of choice
     wget # wget is better than curl because it will resume with exponential backoff
     curl # curl is better than wget because it supports more protocols
     git # git version control
-    btrfs-progs # package for the btrfs filesystem
+    #btrfs-progs # package for the btrfs filesystem
   ];
 
 
