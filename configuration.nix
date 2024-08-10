@@ -11,12 +11,24 @@
     ];
 
   # luks setup
-  boot.initrd.luks.devices.crypted.device = "/dev/nvme0n1p4" ;
+  boot.initrd = {
+      luks.devices = [
+        {
+          name = "luksCrypted";
+          device = "/dev/nvme0n1p3"; # Replace with your UUID
+          preLVM = true; # Unlock before activating LVM
+          allowDiscards = true; # Allow TRIM commands for SSDs
+
+        }
+      ];
+      lvm.devices = [ "/dev/mapper/luksCrypted" ]; # Activate LVM after decryption
+  };
+
   boot.loader.grub.enableCryptodisk = true ; # Enable GRUB support for encrypted disks
 
   # Use the GRUB bootloader
   boot.loader.grub.enable = true;  # Enable GRUB as the bootloader
-  boot.loader.grub.device = "/dev/nvme0n1p3";  # Install GRUB on the EFI system partition
+  boot.loader.grub.device = "nodev";  # Install GRUB on the EFI system partition
   boot.loader.grub.copyKernels = true;  # Activate automatic copying of kernel files
   boot.loader.grub.efiSupport = true;  # Enable EFI support for GRUB
   boot.loader.efi.efiSysMountPoint = "/boot/efi";  # Mount point of the EFI system partition
