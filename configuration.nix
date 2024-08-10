@@ -24,8 +24,6 @@
       lvm.devices = [ "/dev/mapper/luksCrypted" ]; # Activate LVM after decryption
   };
 
-  boot.loader.grub.enableCryptodisk = true ; # Enable GRUB support for encrypted disks
-
   # Use the GRUB bootloader
   boot.loader.grub.enable = true;  # Enable GRUB as the bootloader
   boot.loader.grub.device = "nodev";  # Install GRUB on the EFI system partition
@@ -33,6 +31,7 @@
   boot.loader.grub.efiSupport = true;  # Enable EFI support for GRUB
   boot.loader.efi.efiSysMountPoint = "/boot/efi";  # Mount point of the EFI system partition
   boot.loader.efi.canTouchEfiVariables = true;  # Allow GRUB to modify EFI variables for boot entry management
+  boot.loader.grub.enableCryptodisk = true ; # Enable GRUB support for encrypted disks
 
   # Adds custom menu entries for reboot and poweroff
   boot.loader.grub.extraEntries = ''
