@@ -138,8 +138,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #firefox # favorite browser
-    #kitty 
+    firefox # favorite browser
+    kitty 
     neovim # editor of choice
     wget # wget is better than curl because it will resume with exponential backoff
     curl # curl is better than wget because it supports more protocols
