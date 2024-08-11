@@ -14,14 +14,14 @@
   boot.initrd = {
       luks.devices = [
         {
-          name = "nixosLuks";
+          name = "luksCrypted";
           device = "/dev/nvme0n1p3"; # Replace with your UUID
           preLVM = true; # Unlock before activating LVM
           allowDiscards = true; # Allow TRIM commands for SSDs
 
         }
       ];
-      lvm.devices = [ "/dev/mapper/nixosLuks" ]; # Activate LVM after decryption
+      lvm.devices = [ "/dev/mapper/luksCrypted" ]; # Activate LVM after decryption
   };
 
   # Use the GRUB bootloader
