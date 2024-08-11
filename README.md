@@ -5,8 +5,7 @@
 ### NixOS Installation Guide
 
 **Summary:**
-This guide will walk you through the installation of NixOS, covering connecting to WiFi, partitioning the disk, formatting and mounting partitions, and installing NixOS. Follow these steps to ensure a smooth setup with an encrypted root filesystem, a dedicated boot partition, and separate home and swap volumes.
-
+This guide will walk you through installing NixOS, covering connecting to WiFi, partitioning the disk, formatting and mounting partitions, and completing the installation. Follow these steps to set up an encrypted root filesystem with dedicated boot, home, and swap volumes.
 ---
 
 **1. Connect to WiFi:**
