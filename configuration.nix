@@ -146,6 +146,7 @@
     curl # curl is better than wget because it supports more protocols
     git # git version control
     #btrfs-progs # package for the btrfs filesystem
+    sleek-grub-theme
   ];
 
 
