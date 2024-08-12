@@ -11,7 +11,7 @@
 
 ---
 
-**1. Connect to WiFi:**
+#1. Connect to WiFi:
 
 1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
    ```sh
