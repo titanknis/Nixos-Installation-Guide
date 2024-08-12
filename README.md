@@ -242,4 +242,3 @@
 
 For more detailed information and additional help, consult the [NixOS Manual](https://nixos.org/manual/nixos/stable/).
 
----
