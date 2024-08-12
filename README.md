@@ -1,22 +1,21 @@
-# nixos installation guide
+# NixOS Installation Guide
 
----
+**Table of Contents:**
 
-### NixOS Installation Guide
+1. [Connect to WiFi](#1-connect-to-wifi)
+2. [Partition the Disk Using `parted`](#2-partition-the-disk-using-parted)
+3. [Format Partitions](#3-format-partitions)
+4. [Mount Partitions](#4-mount-partitions)
+5. [Generate NixOS Configuration and Install](#5-generate-nixos-configuration-and-install)
+6. [Troubleshooting](#troubleshooting)
 
-**Summary:**
-This guide will walk you through installing NixOS, covering connecting to WiFi, partitioning the disk, formatting and mounting partitions, and completing the installation. Follow these steps to set up an encrypted root filesystem with dedicated boot, home, and swap volumes.
 ---
 
 **1. Connect to WiFi:**
 
-1. **Start `wpa_supplicant`:**
+1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
    ```sh
    sudo systemctl start wpa_supplicant
-   ```
-
-2. **Configure WiFi with `wpa_cli`:**
-   ```sh
    wpa_cli
    ```
 
@@ -140,10 +139,6 @@ This guide will walk you through installing NixOS, covering connecting to WiFi, 
 
 **4. Mount Partitions:**
 
-**Correct Mounting Order Summary**
-
-Here's the recommended mounting order to ensure all directories are properly placed on the root filesystem:
-
 1. **Mount Root Partition:**
    ```sh
    mount /dev/vg0/nixos-root /mnt  # Mount root logical volume
@@ -174,15 +169,6 @@ Here's the recommended mounting order to ensure all directories are properly pla
    swapon /dev/vg0/nixos-swap  # Enable swap logical volume
    ```
 
-**Key Points:**
-
-- **Directories Creation:** Ensures that `/mnt/boot/efi` and `/mnt/home` are available on the root filesystem before mounting the partitions.
-- **ESP Accessibility:** Mounting the ESP first ensures that it is correctly accessible even if other partitions are unmounted.
-- **Boot Partition:** Mounted after the ESP to prevent it from obscuring the `/boot/efi` mount point.
-- **Home Partition:** Mounted last to keep user data separate and organized.
-
-This order maintains a clear and functional directory structure and prevents potential issues with directory visibility or mount conflicts.
-
 ---
 
 **5. Generate NixOS Configuration and Install:**
@@ -203,23 +189,56 @@ This order maintains a clear and functional directory structure and prevents pot
    vim configuration.nix
    ```
 
-4. **Pull the trigger!**  
-   Once you’re satisfied with your configuration, pull the trigger and proceed with the installation.
-
-5. **Install NixOS:**
+4. **Install NixOS:**
    ```sh
    nixos-install
    ```
 
-6. **Reboot the system:**
+5. **Reboot the system:**
    ```sh
    reboot
    ```
 
 ---
 
-**Final Words:**
+**Troubleshooting:**
 
-Congratulations on setting up NixOS! If you encounter any issues or need further customization, the NixOS community and documentation are excellent resources. Enjoy your new system!
+**In case of installation failure or if you need to fix a minor issue:**
+
+1. **If partitions need to be recreated, start from the beginning of the guide.**  
+   This includes creating the partition table, partitioning, formatting, and mounting. Refer to the [NixOS Installation Guide](#nixos-installation-guide) for detailed instructions.
+
+2. **Optionally, format the partitions if you need to correct their filesystems.**  
+   Refer to the [Formatting Partitions](#3-format-partitions) section of the guide for specific commands.
+
+3. **If partitions are already present and you need to fix a minor issue:**
+
+   - **Open LUKS encrypted partitions:**
+     ```sh
+     cryptsetup open /dev/nvme0n1p3 luksCrypted
+     ```
+
+   - **Activate all LVM volume groups:**
+     ```sh
+     vgchange -ay
+     ```
+
+     **Note:** You will be prompted to enter the LUKS password.
+
+   - **Mount partitions:**
+     ```sh
+     mount /dev/vg0/nixos-root /mnt
+     mkdir -p /mnt/boot/efi /mnt/home
+     mount /dev/nvme0n1p1 /mnt/boot/efi
+     mount /dev/nvme0n1p2 /mnt/boot
+     mount /dev/vg0/nixos-home /mnt/home
+     swapon /dev/vg0/nixos-swap
+     ```
+
+**The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Formatting Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.**
+
+---
+
+For more detailed information and additional help, consult the [NixOS Manual](https://nixos.org/manual/nixos/stable/).
 
 ---
