@@ -243,5 +243,3 @@
 For more detailed information and additional help, consult the [NixOS Manual](https://nixos.org/manual/nixos/stable/).
 
 ---
-
-This format should help users easily navigate to the relevant sections of your guide.
