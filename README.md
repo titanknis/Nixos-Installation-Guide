@@ -1,6 +1,3 @@
-Sure, here's your installation guide with properly set anchor links:
-
----
 
 # NixOS Installation Guide
 
