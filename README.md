@@ -1,3 +1,7 @@
+Sure, here's your installation guide with properly set anchor links:
+
+---
+
 # NixOS Installation Guide
 
 **Table of Contents:**
@@ -11,7 +15,7 @@
 
 ---
 
-# 1. Connect to WiFi:
+## 1. Connect to WiFi
 
 1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
    ```sh
@@ -40,7 +44,7 @@
 
 ---
 
-**2. Partition the Disk Using `parted`:**
+## 2. Partition the Disk Using `parted`
 
 1. **Start `parted` in interactive mode:**
    ```sh
@@ -71,7 +75,7 @@
 
 ---
 
-**3. Format Partitions:**
+## 3. Format Partitions
 
 1. **Format the ESP partition (1 MiB to 1 GiB) as FAT32:**
    ```sh
@@ -137,7 +141,7 @@
 
 ---
 
-**4. Mount Partitions:**
+## 4. Mount Partitions
 
 1. **Mount Root Partition:**
    ```sh
@@ -171,7 +175,7 @@
 
 ---
 
-**5. Generate NixOS Configuration and Install:**
+## 5. Generate NixOS Configuration and Install
 
 1. **Generate the NixOS configuration:**
    ```sh
@@ -201,7 +205,7 @@
 
 ---
 
-**Troubleshooting:**
+## Troubleshooting
 
 **In case of installation failure or if you need to fix a minor issue:**
 
@@ -209,7 +213,7 @@
    This includes creating the partition table, partitioning, formatting, and mounting. Refer to the [NixOS Installation Guide](#nixos-installation-guide) for detailed instructions.
 
 2. **Optionally, format the partitions if you need to correct their filesystems.**  
-   Refer to the [Formatting Partitions](#3-format-partitions) section of the guide for specific commands.
+   Refer to the [Format Partitions](#3-format-partitions) section of the guide for specific commands.
 
 3. **If partitions are already present and you need to fix a minor issue:**
 
@@ -235,10 +239,12 @@
      swapon /dev/vg0/nixos-swap
      ```
 
-**The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Formatting Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.**
+**The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Format Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.**
 
 ---
 
 For more detailed information and additional help, consult the [NixOS Manual](https://nixos.org/manual/nixos/stable/).
 
 ---
+
+This format should help users easily navigate to the relevant sections of your guide.
