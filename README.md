@@ -63,8 +63,10 @@ There are some UEFI system setup changes that need to be configured for NixOS to
 Once in the menu:
 
 1. **Ensure Safe Boot is Disabled**.
-2. **Ensure UEFI Mode is Enabled**.
-3. **Ensure Boot from USB is Enabled**.
+2. **Ensure Fast Boot is Disabled**.
+3. **Ensure UEFI Mode is Enabled**.
+4. **Ensure Boot from USB is Enabled**.
+
 
 ---
 
