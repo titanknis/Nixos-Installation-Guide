@@ -296,9 +296,6 @@ Now that your UEFI setup is configured, it’s time to boot the installation med
 
 ---
 
-## Here's the revised troubleshooting section:
-
----
 
 ## Troubleshooting
 
