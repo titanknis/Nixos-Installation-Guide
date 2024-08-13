@@ -276,9 +276,10 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
    - **Mount partitions:**
      ```sh
      mount /dev/vg0/nixos-root /mnt
-     mkdir -p /mnt/boot/efi /mnt/home
-     mount /dev/nvme0n1p1 /mnt/boot/efi
+     mkdir -p /mnt/boot /mnt/home
      mount /dev/nvme0n1p2 /mnt/boot
+     mkdir -p /mnt/boot/efi
+     mount /dev/nvme0n1p1 /mnt/boot/efi
      mount /dev/vg0/nixos-home /mnt/home
      swapon /dev/vg0/nixos-swap
      ```
