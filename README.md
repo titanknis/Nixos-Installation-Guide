@@ -4,25 +4,73 @@
 **Table of Contents:**
 
 1. [Preface](#preface)
-2. [Connect to WiFi](#1-connect-to-wifi)
-3. [Partition the Disk Using `parted`](#2-partition-the-disk-using-parted)
-4. [Format Partitions](#3-format-partitions)
-5. [Mount Partitions](#4-mount-partitions)
-6. [Generate NixOS Configuration and Install](#5-generate-nixos-configuration-and-install)
-7. [Troubleshooting](#troubleshooting)
+2. [Installation Media](#installation-media)
+3. [System Configuration](#system-configuration)
+4. [Connect to WiFi](#1-connect-to-wifi)
+5. [Partition the Disk Using `parted`](#2-partition-the-disk-using-parted)
+6. [Format Partitions](#3-format-partitions)
+7. [Mount Partitions](#4-mount-partitions)
+8. [Generate NixOS Configuration and Install](#5-generate-nixos-configuration-and-install)
+9. [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Preface
+
+**Requirements for this guide:**
+
+- **LVM disk partitioning** for flexibility.
+- **LUKS encryption** for the entire LVM physical volume for security.
+- **UEFI boot loader** and **boot partition**.
+- **Unencrypted boot partition** to allow GRUB to access its files, especially themes.
+- **USB stick installation**.
+- **Connecting to the internet using WiFi** (specifically WPA) instead of Ethernet.
+- **Full disk installation only**; no dual boot.
 
 **Important:** All commands should be executed as the root user. To gain root access, use:
 ```sh
 sudo -i
 ```
 
-**Note:** For the most part, installing NixOS is straightforward if you follow this guide. However, a basic understanding of the Nix language is essential. NixOS is deeply integrated with Nix, and you'll need to learn it to create your own configuration or modify an existing one to suit your preferences. 
+**Note:** For the most part, installing NixOS is straightforward if you follow this guide. However, a basic understanding of the Nix language is essential. NixOS is deeply integrated with Nix, and you'll need to learn it to create your own configuration or modify an existing one to suit your preferences.
 
 I won’t be covering Nix language fundamentals in this guide. If you have a basic understanding, my example configuration file should be clear and helpful. Learning the basics of Nix is not difficult—it’s quite accessible and easy to grasp. For an introduction, you can refer to the [Nix Language Tutorial](https://nix.dev/tutorials/nix-language.html).
+
+---
+
+## Installation Media
+
+1. **Download the 64-bit minimal install CD** from the [NixOS downloads page](https://nixos.org/download.html).
+
+2. **Create a bootable USB stick**. Consider using [Ventoy](https://www.ventoy.net/en/index.html) for its flexibility, but if you prefer the command line, use the following:
+
+   ```bash
+   # Identify your USB stick
+   $ lsblk
+
+   # Copy ISO to USB stick (replace $DISK with your USB stick)
+   $ sudo dd if=$INSTALLER_ISO of=$DISK bs=1M status=progress
+   ```
+
+   Here, `$DISK` represents the USB stick. This command will erase all data on the USB stick. It’s sufficient to create a bootable USB drive, though Ventoy offers a more versatile approach.
+
+---
+
+## System Configuration
+
+There are some UEFI system setup changes that need to be configured for NixOS to install properly. To access the menu on your machine and make the changes, do a quick web search specific to your model. For example, on my HP, you need to press `F9` at the beginning of a boot to access the menu.
+
+Once in the menu:
+
+1. **Ensure Safe Boot is Disabled**.
+2. **Ensure UEFI Mode is Enabled**.
+3. **Ensure Boot from USB is Enabled**.
+
+---
+
+## Installation
+
+Now that your UEFI setup is configured, it’s time to boot the installation media. On my HP machine, press `F9` during boot to open the boot menu and select the USB device as the one to boot from. This process may vary from machine to machine.
 
 ---
 
