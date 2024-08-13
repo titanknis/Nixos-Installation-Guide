@@ -12,16 +12,14 @@
 
   # luks setup
   boot.initrd = {
-      luks.devices = [
-        {
-          name = "luksCrypted";
+      luks.devices = {
+        luksCrypted = {
           device = "/dev/nvme0n1p3"; # Replace with your UUID
           preLVM = true; # Unlock before activating LVM
           allowDiscards = true; # Allow TRIM commands for SSDs
-
-        }
-      ];
-      lvm.devices = [ "/dev/mapper/luksCrypted" ]; # Activate LVM after decryption
+        };
+      };
+      #lvm.devices = [ "/dev/mapper/luksCrypted" ]; # Activate LVM after decryption
   };
 
   # Use the GRUB bootloader
@@ -87,14 +85,14 @@
   };
 
   # Enable the KDE Plasma desktop environment
-  #services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable Wayland for KDE Plasma
   # services.xserver.windowManager.plasma6.enableWayland = true;
 
   # Enable the SDDM display manager
-  #services.displayManager.sddm.enable = true;
-  #services.displayManager.defaultSession = "plasma";  # Set the default session to Plasma Wayland
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "plasma";  # Set the default session to Plasma Wayland
   # services.displayManager.autoLogin.enable = true;  # Enable auto-login (commented out)
   # services.displayManager.autoLogin.user = "alice";  # Set the auto-login user to 'alice' (commented out)
 
