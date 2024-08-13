@@ -248,20 +248,18 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 
 ---
 
+## Here's the revised troubleshooting section:
+
+---
+
 ## Troubleshooting
 
 **In case of installation failure or if you need to fix a minor issue:**
 
-1. **If partitions need to be recreated, start from the beginning of the guide.**  
-   This includes creating the partition table
+1. **If partitions need to be recreated:**
+   - Start from the [beginning of the guide](#nixos-installation-guide), including partitioning, formatting, and mounting. Refer to the [Partition the Disk Using `parted`](#2-partition-the-disk-using-parted), [Format Partitions](#3-format-partitions), and [Mount Partitions](#4-mount-partitions) sections for detailed instructions.
 
-, partitioning, formatting, and mounting. Refer to the [NixOS Installation Guide](#nixos-installation-guide) for detailed instructions.
-
-2. **Optionally, format the partitions if you need to correct their filesystems.**  
-   Refer to the [Format Partitions](#3-format-partitions) section of the guide for specific commands.
-
-3. **If partitions are already present and you need to fix a minor issue:**
-
+2. **If partitions are already present, properly formatted, and contain an almost fully functional system:**
    - **Open LUKS encrypted partitions:**
      ```sh
      cryptsetup open /dev/nvme0n1p3 luksCrypted
@@ -284,7 +282,10 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
      swapon /dev/vg0/nixos-swap
      ```
 
-**The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Format Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.**
+---
+**The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Format Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.
+If issues persist or the system remains non-functional, consider reinstalling NixOS from the [beginning of the guide](#nixos-installation-guide).
+**
 
 ---
 
