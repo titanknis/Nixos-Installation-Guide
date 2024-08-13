@@ -167,104 +167,122 @@ Now that your UEFI setup is configured, it’s time to boot the installation med
 ---
 
 
-## 3. Format Partitions
+### 3. Format Partitions
 
-1. **Format the ESP partition (1 MiB to 1 GiB) as FAT32:**
-   ```sh
-   mkfs.fat -F32 -n ESP /dev/nvme0n1p1
-   ```
+**Format the ESP partition (1 MiB to 1 GiB) as FAT32:**
 
-2. **Format the BOOT partition (1 GiB to 2 GiB) as ext4:**
-   ```sh
-   mkfs.ext4 -L nixos-boot /dev/nvme0n1p2
-   ```
+```bash
+mkfs.fat -F32 -n ESP /dev/nvme0n1p1
+```
 
-3. **Initialize the LUKS encrypted partition (2 GiB to end - 1 MiB):**
-   ```sh
-   cryptsetup luksFormat /dev/nvme0n1p3
-   ```
+**Format the BOOT partition (1 GiB to 2 GiB) as ext4:**
 
-   **Open the LUKS partition:**
-   ```sh
-   cryptsetup open /dev/nvme0n1p3 luksCrypted
-   ```
+```bash
+mkfs.ext4 -L nixos-boot /dev/nvme0n1p2
+```
 
-4. **Create LVM physical volume on the decrypted partition:**
-   ```sh
-   pvcreate /dev/mapper/luksCrypted
-   ```
+**Initialize the LUKS encrypted partition (2 GiB to end - 1 MiB):**
 
-5. **Create an LVM volume group (e.g., `vg0`):**
-   ```sh
-   vgcreate vg0 /dev/mapper/luksCrypted
-   ```
+```bash
+cryptsetup luksFormat /dev/nvme0n1p3
+```
 
-6. **Create logical volumes in the following order:**
-   - **Create root volume (30 GiB):**
-     ```sh
-     lvcreate -L 30G -n nixos-root vg0
-     ```
+**Open the LUKS partition:**
 
-   - **Create home volume (50 GiB):**
-     ```sh
-     lvcreate -L 50G -n nixos-home vg0
-     ```
+```bash
+cryptsetup open /dev/nvme0n1p3 luksCrypted
+```
 
-   - **Create swap volume (20 GiB):**
-     ```sh
-     lvcreate -L 20G -n nixos-swap vg0
-     ```
+**Create LVM physical volume on the decrypted partition:**
 
-7. **Format logical volumes:**
-   - **Format root volume as ext4:**
-     ```sh
-     mkfs.ext4 -L nixos-root /dev/vg0/nixos-root
-     ```
+```bash
+pvcreate /dev/mapper/luksCrypted
+```
 
-   - **Format home volume as ext4:**
-     ```sh
-     mkfs.ext4 -L nixos-home /dev/vg0/nixos-home
-     ```
+**Create an LVM volume group (e.g., vg0):**
 
-   - **Format swap volume:**
-     ```sh
-     mkswap -L nixos-swap /dev/vg0/nixos-swap
-     ```
+```bash
+vgcreate vg0 /dev/mapper/luksCrypted
+```
 
----
+**Create logical volumes in the following order:**
 
-## 4. Mount Partitions
+- **Create root volume (30 GiB, adjust based on your requirements):**
 
-1. **Mount Root Partition:**
-   ```sh
-   mount /dev/vg0/nixos-root /mnt
-   ```
+  ```bash
+  lvcreate -L 30G -n nixos-root vg0
+  ```
 
-2. **Create Necessary Directories on the Root Filesystem:**
-   ```sh
-   mkdir -p /mnt/boot /mnt/home
-   ```
+- **Create home volume (50 GiB, adjust based on your requirements):**
 
-3. **Mount Boot Partition:**
-   ```sh
-   mount /dev/nvme0n1p2 /mnt/boot
-   ```
+  ```bash
+  lvcreate -L 50G -n nixos-home vg0
+  ```
 
-4. **Create Directory for EFI System Partition and Mount It:**
-   ```sh
-   mkdir -p /mnt/boot/efi
-   mount /dev/nvme0n1p1 /mnt/boot/efi
-   ```
+- **Create swap volume (20 GiB, adjust based on your requirements; should be at least the size of your RAM if you intend to use hibernation):**
 
-5. **Mount Home Partition (if separate):**
-   ```sh
-   mount /dev/vg0/nixos-home /mnt/home
-   ```
+  ```bash
+  lvcreate -L 20G -n nixos-swap vg0
+  ```
 
-6. **Enable Swap:**
-   ```sh
-   swapon /dev/vg0/nixos-swap
-   ```
+**Format logical volumes:**
+
+- **Format root volume as ext4:**
+
+  ```bash
+  mkfs.ext4 -L nixos-root /dev/vg0/nixos-root
+  ```
+
+- **Format home volume as ext4:**
+
+  ```bash
+  mkfs.ext4 -L nixos-home /dev/vg0/nixos-home
+  ```
+
+- **Format swap volume:**
+
+  ```bash
+  mkswap -L nixos-swap /dev/vg0/nixos-swap
+  ```
+
+### 4. Mount Partitions
+
+**Mount Root Partition:**
+
+```bash
+mount /dev/vg0/nixos-root /mnt
+```
+
+**Create Necessary Directories on the Root Filesystem:**
+
+```bash
+mkdir -p /mnt/boot /mnt/home
+```
+
+**Mount Boot Partition:**
+
+```bash
+mount /dev/nvme0n1p2 /mnt/boot
+```
+
+**Create Directory for EFI System Partition and Mount It:**
+
+```bash
+mkdir -p /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot/efi
+```
+
+**Mount Home Partition (if separate):**
+
+```bash
+mount /dev/vg0/nixos-home /mnt/home
+```
+
+**Enable Swap:**
+
+```bash
+swapon /dev/vg0/nixos-swap
+```
 
 ---
 
