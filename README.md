@@ -1,6 +1,4 @@
 
----
-
 # NixOS Installation Guide
 
 **Table of Contents:**
