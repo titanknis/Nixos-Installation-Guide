@@ -181,7 +181,7 @@
 
 2. **Optionally, pull the configuration repository from GitHub and force overwrite:**
    ```sh
-   git clone https://github.com/titanknis/nixos.git /mnt/etc/nixos --force
+   git clone https://github.com/titanknis/Nixos-Installation-Guide.git 
    ```
 
 3. **Change to the configuration directory and edit the configuration file using `vim`:**
