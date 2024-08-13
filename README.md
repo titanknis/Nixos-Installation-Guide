@@ -107,42 +107,66 @@ Now that your UEFI setup is configured, it’s time to boot the installation med
 
 ## 2. Partition the Disk Using `parted`
 
+**Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
+
 1. **Start `parted` in interactive mode:**
+
    ```sh
    parted /dev/nvme0n1
    ```
 
+   Replace `/dev/nvme0n1` with your actual disk identifier if different.
+
 2. **Create a new GPT partition table:**
+
    ```sh
    (parted) mklabel gpt
    ```
 
-3. **Create partitions with labels:**
-   - **Create the ESP partition (1 MiB to 1 GiB) as FAT32:**
+   This command sets up the disk to use the GPT partitioning scheme, which is necessary for UEFI systems.
+
+3. **Create the partitions:**
+
+   - **Create the EFI System Partition (ESP) (1 MiB to 1 GiB):**
+     
      ```sh
      (parted) mkpart ESP fat32 1MiB 1GiB
      (parted) set 1 esp on
      ```
 
-   - **Create the BOOT partition (1 GiB to 2 GiB) as ext4:**
+     This sets up a 1 GiB partition formatted as FAT32 for the EFI system. It’s required for UEFI booting.
+
+   - **Create the BOOT partition (1 GiB to 2 GiB):**
+
      ```sh
      (parted) mkpart BOOT ext4 1GiB 2GiB
      ```
 
+     This sets up a 1 GiB partition formatted as ext4 for the boot loader files.
+
    - **Create the LUKS encrypted partition (2 GiB to end - 1 MiB):**
+
      ```sh
      (parted) mkpart LUKS 2GiB -1MiB
      ```
 
+     This creates the remaining space on the disk for LUKS encryption.
+
 4. **Print the partition table to verify:**
+
    ```sh
    (parted) print
    ```
 
 5. **Quit `parted`:**
+
    ```sh
    (parted) quit
    ```
+
+---
+
+Let me know if there's anything else you need!
 
 ---
 
