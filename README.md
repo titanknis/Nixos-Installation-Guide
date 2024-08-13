@@ -332,8 +332,7 @@ Now that your UEFI setup is configured, it’s time to boot the installation med
 
 ---
 **The rest is up to you. Complete the installation or troubleshoot as needed based on your specific situation. Refer to the [Format Partitions](#3-format-partitions) and [Mount Partitions](#4-mount-partitions) sections as needed.
-If issues persist or the system remains non-functional, consider reinstalling NixOS from the [beginning of the guide](#nixos-installation-guide).
-**
+If issues persist or the system remains non-functional, consider reinstalling NixOS from the [beginning of the guide](#nixos-installation-guide).**
 
 ---
 
