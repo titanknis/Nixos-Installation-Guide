@@ -166,9 +166,6 @@ Now that your UEFI setup is configured, it’s time to boot the installation med
 
 ---
 
-Let me know if there's anything else you need!
-
----
 
 ## 3. Format Partitions
 
