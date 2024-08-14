@@ -58,7 +58,7 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 
 ## System Configuration
 
-There are some UEFI system setup changes that need to be configured for NixOS to install properly. To access the menu on your machine and make the changes, do a quick web search specific to your model. For example, on my HP, you need to press `F12` at the beginning of a boot to access the uefi menu.
+Some UEFI system settings need to be adjusted for NixOS installation. To find the exact steps for your machine, do a quick web search for your model. For example, on my HP, you press `F12` at boot to access the UEFI menu.
 
 Once in the menu:
 
