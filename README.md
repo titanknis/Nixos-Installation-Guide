@@ -317,7 +317,7 @@ swapon /dev/vg0/nixos-swap
 
    **Remember:** Mastering NixOS is a journey. Take your time to understand each concept thoroughly before moving on to more advanced topics.
 
-3. **Change to the configuration directory and edit the configuration file using `vim` or nano or whatever poison you chose:**
+3. **Change to the configuration directory and edit the configuration file using `vim` or nano or whatever your poison might be:**
    ```sh
    cd /mnt/etc/nixos
    vim configuration.nix
