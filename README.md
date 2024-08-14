@@ -72,7 +72,7 @@ Once in the menu:
 
 ## Installation
 
-Now that your UEFI setup is configured, it’s time to boot the installation media. On my HP machine, press `F9` during boot to open the boot menu and select the USB device as the one to boot from. This process may vary from machine to machine.
+With your UEFI setup complete, it's time to boot from the installation media. On HP machines, press `F9` during startup to access the boot menu and select the USB device. Note that this process may vary depending on your hardware.
 
 ---
 
@@ -317,7 +317,7 @@ swapon /dev/vg0/nixos-swap
 
    **Remember:** Mastering NixOS is a journey. Take your time to understand each concept thoroughly before moving on to more advanced topics.
 
-3. **Change to the configuration directory and edit the configuration file using `vim`:**
+3. **Change to the configuration directory and edit the configuration file using `vim` or nano or whatever poison you chose:**
    ```sh
    cd /mnt/etc/nixos
    vim configuration.nix
