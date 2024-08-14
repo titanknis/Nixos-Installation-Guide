@@ -19,7 +19,7 @@
 
 **Requirements for this guide:**
 
-- **LVM disk partitioning** for flexibility.
+- **LVM disk partitioning** for flexibility in storage management.
 - **LUKS encryption** for the entire LVM physical volume for security.
 - **UEFI boot loader** and **boot partition**.
 - **Unencrypted boot partition** to allow GRUB to access its files, especially themes.
@@ -58,7 +58,7 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 
 ## System Configuration
 
-There are some UEFI system setup changes that need to be configured for NixOS to install properly. To access the menu on your machine and make the changes, do a quick web search specific to your model. For example, on my HP, you need to press `F9` at the beginning of a boot to access the menu.
+There are some UEFI system setup changes that need to be configured for NixOS to install properly. To access the menu on your machine and make the changes, do a quick web search specific to your model. For example, on my HP, you need to press `F12` at the beginning of a boot to access the uefi menu.
 
 Once in the menu:
 
