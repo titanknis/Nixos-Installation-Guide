@@ -1,4 +1,22 @@
 
+# NixOS Installation Guide
+
+**Table of Contents:**
+
+1. [Preface](#preface)
+2. [Preparations](#preparations)
+   - [Installation Media](#installation-media)
+   - [System Configuration](#system-configuration)
+3. [Installation Process](#installation-process)
+   - [Connect to WiFi](#connect-to-wifi)
+   - [Partition the Disk Using `parted`](#partition-the-disk-using-parted)
+   - [Format Partitions](#format-partitions)
+   - [Mount Partitions](#mount-partitions)
+   - [Generate NixOS Configuration and Install](#generate-nixos-configuration-and-install)
+4. [Troubleshooting](#troubleshooting)
+
+
+---
 
 ## Preface
 
