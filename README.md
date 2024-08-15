@@ -21,7 +21,6 @@
 ## Preface
 
 **Requirements for this guide:**
-   <br>
 
 - **LVM disk partitioning** for flexibility in storage management.
 - **LUKS encryption** for the entire LVM physical volume for security.
