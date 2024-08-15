@@ -36,25 +36,46 @@ sudo -i
 
 I won’t be covering Nix language fundamentals in this guide. If you have a basic understanding, my example configuration file should be clear and helpful. Learning the basics of Nix is not difficult—it’s quite accessible and easy to grasp. For an introduction, you can refer to the [Nix Language Tutorial](https://nix.dev/tutorials/nix-language.html).
 
+
 ---
 
 ## Installation Media
 
 1. **Download the 64-bit minimal install CD** from the [NixOS downloads page](https://nixos.org/download.html).
 
-2. **Create a bootable USB stick**. Consider using [Ventoy](https://www.ventoy.net/en/index.html) for its flexibility, but if you prefer the command line, use the following:
+2. **Verify the ISO Integrity**
 
-   ```bash
-   # Identify your USB stick
-   $ lsblk
+   - Download the SHA256 checksum file from the same page.
+   - Place both the ISO and checksum file in the same folder.
+   - Run:
 
-   # Copy ISO to USB stick (replace $DISK with your USB stick)
-   $ sudo dd if=$INSTALLER_ISO of=$DISK bs=1M status=progress
-   ```
+     ```sh
+     sha256sum -c <checksum-file>
+     ```
 
-   Here, `$DISK` represents the USB stick. This command will erase all data on the USB stick. It’s sufficient to create a bootable USB drive, though Ventoy offers a more versatile approach.
+   - Ensure the output indicates that the ISO file is `OK`. If the verification fails, redownload the ISO and checksum files and repeat the verification process.
+
+3. **Create a Bootable USB Stick**
+
+   - Consider using [Ventoy](https://www.ventoy.net/en/index.html) for flexibility.
+   - Alternatively, use the command line:
+
+     1. Identify your USB stick:
+
+        ```sh
+        lsblk
+        ```
+
+     2. Copy the ISO to the USB stick (replace `$DISK` with your USB stick):
+
+        ```sh
+        sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
+        ```
+
+        **Note:** This command will erase all data on the USB stick. Replace `<ISO_FILE>` with the name of your ISO file.
 
 ---
+
 
 ## System Configuration
 
