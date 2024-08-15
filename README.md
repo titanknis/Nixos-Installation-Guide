@@ -27,6 +27,9 @@
 - **Connecting to the internet using WiFi** (specifically WPA) instead of Ethernet.
 - **Full disk installation only**; no dual boot.
 
+**Expected Outcome:**
+By following this guide, you will have a secure NixOS system with encrypted storage and LVM management, tailored to your specific hardware and preferences.
+
 **Important:** All commands should be executed as the root user. To gain root access, use:
 ```sh
 sudo -i
