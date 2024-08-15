@@ -362,7 +362,7 @@ swapon /dev/vg0/nixos-swap
 ---
 
 
-### Troubleshooting
+## Troubleshooting
 
 **In case of installation failure or if you need to fix a minor issue:**
 
