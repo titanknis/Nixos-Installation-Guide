@@ -1,17 +1,20 @@
+---
 
 # NixOS Installation Guide
 
 **Table of Contents:**
 
 1. [Preface](#preface)
-2. [Installation Media](#installation-media)
-3. [System Configuration](#system-configuration)
-4. [Connect to WiFi](#1-connect-to-wifi)
-5. [Partition the Disk Using `parted`](#2-partition-the-disk-using-parted)
-6. [Format Partitions](#3-format-partitions)
-7. [Mount Partitions](#4-mount-partitions)
-8. [Generate NixOS Configuration and Install](#5-generate-nixos-configuration-and-install)
-9. [Troubleshooting](#troubleshooting)
+2. [Preparations](#preparations)
+   - [Installation Media](#installation-media)
+   - [System Configuration](#system-configuration)
+3. [Installation Process](#installation-process)
+   - [Connect to WiFi](#connect-to-wifi)
+   - [Partition the Disk Using `parted`](#partition-the-disk-using-parted)
+   - [Format Partitions](#format-partitions)
+   - [Mount Partitions](#mount-partitions)
+   - [Generate NixOS Configuration and Install](#generate-nixos-configuration-and-install)
+4. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -39,10 +42,11 @@ sudo -i
 
 I won’t be covering Nix language fundamentals in this guide. If you have a basic understanding, my example configuration file should be clear and helpful. Learning the basics of Nix is not difficult—it’s quite accessible and easy to grasp. For an introduction, you can refer to the [Nix Language Tutorial](https://nix.dev/tutorials/nix-language.html).
 
-
 ---
 
-## Installation Media
+## Preparations
+
+### Installation Media
 
 1. **Download the 64-bit minimal install CD** from the [NixOS downloads page](https://nixos.org/download.html).
 
@@ -79,8 +83,7 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 
 ---
 
-
-## System Configuration
+### System Configuration
 
 Some UEFI system settings need to be adjusted for NixOS installation. To find the exact steps for your machine, do a quick web search for your model. For example, on my HP, you press `F12` at boot to access the UEFI menu.
 
@@ -91,16 +94,11 @@ Once in the menu:
 3. **Ensure UEFI Mode is Enabled**.
 4. **Ensure Boot from USB is Enabled**.
 
-
 ---
 
-## Installation
+## Installation Process
 
-With your UEFI setup complete, it's time to boot from the installation media. On HP machines, press `F9` during startup to access the boot menu and select the USB device. Note that this process may vary depending on your hardware.
-
----
-
-## 1. Connect to WiFi
+### Connect to WiFi
 
 1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
    ```sh
@@ -129,7 +127,7 @@ With your UEFI setup complete, it's time to boot from the installation media. On
 
 ---
 
-## 2. Partition the Disk Using `parted`
+### Partition the Disk Using `parted`
 
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
 
@@ -190,8 +188,7 @@ With your UEFI setup complete, it's time to boot from the installation media. On
 
 ---
 
-
-### 3. Format Partitions
+### Format Partitions
 
 **Format the ESP partition (1 MiB to 1 GiB) as FAT32:**
 
@@ -269,7 +266,9 @@ vgcreate vg0 /dev/mapper/luksCrypted
   mkswap -L nixos-swap /dev/vg0/nixos-swap
   ```
 
-### 4. Mount Partitions
+---
+
+### Mount Partitions
 
 **Mount Root Partition:**
 
@@ -310,7 +309,7 @@ swapon /dev/vg0/nixos-swap
 
 ---
 
-## 5. Generate NixOS Configuration and Install
+### 5. Generate NixOS Configuration and Install
 
 1. **Generate the NixOS configuration:**
    ```sh
@@ -362,7 +361,7 @@ swapon /dev/vg0/nixos-swap
 ---
 
 
-## Troubleshooting
+### Troubleshooting
 
 **In case of installation failure or if you need to fix a minor issue:**
 
