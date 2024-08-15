@@ -64,7 +64,7 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 
 3. **Create a Bootable USB Stick**
 
-   - Consider using [Ventoy](https://www.ventoy.net/en/index.html "just install ventoy on the usb and copy any number of iso files to it") for flexibility.
+   - Consider using [Ventoy](https://www.ventoy.net/en/index.html "just install ventoy on the usb and copy any number of iso files to it. You can boot easily from any iso copyed to the usb") for flexibility.
    - Alternatively, use the command line:
 
      1. Identify your USB stick:
