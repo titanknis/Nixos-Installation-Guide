@@ -103,7 +103,7 @@ Once in the menu:
 
 The **US layout** is chosen by default.
 ```sh
-sudo loadkeys colemak-dh
+sudo loadkeys mod-dh-ansi-us
 ```
 
 For other layouts like French or German:
