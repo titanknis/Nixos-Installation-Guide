@@ -169,14 +169,6 @@ For other layouts like French or German:
 
      This sets up a 1 GiB partition formatted as FAT32 for the EFI system. It’s required for UEFI booting.
 
-   - **Create the BOOT partition (1 GiB to 2 GiB):**
-
-     ```sh
-     (parted) mkpart BOOT ext4 1GiB 2GiB
-     ```
-
-     This sets up a 1 GiB partition formatted as ext4 for the boot loader files.
-
    - **Create the LUKS encrypted partition (2 GiB to end - 1 MiB):**
 
      ```sh
@@ -207,12 +199,6 @@ For other layouts like French or German:
 mkfs.fat -F32 -n ESP /dev/nvme0n1p1
 ```
 
-**Format the BOOT partition (1 GiB to 2 GiB) as ext4:**
-
-```bash
-mkfs.ext4 -L nixos-boot /dev/nvme0n1p2
-```
-
 **Initialize the LUKS encrypted partition (2 GiB to end - 1 MiB):**
 
 ```bash
@@ -239,16 +225,16 @@ vgcreate vg0 /dev/mapper/luksCrypted
 
 **Create logical volumes in the following order:**
 
-- **Create root volume (30 GiB, adjust based on your requirements):**
+- **Create root volume (50 GiB, adjust based on your requirements):**
 
   ```bash
-  lvcreate -L 30G -n nixos-root vg0
+  lvcreate -L 50G -n nixos-root vg0
   ```
 
-- **Create home volume (50 GiB, adjust based on your requirements):**
+- **Create home volume (80 GiB, adjust based on your requirements):**
 
   ```bash
-  lvcreate -L 50G -n nixos-home vg0
+  lvcreate -L 80G -n nixos-home vg0
   ```
 
 - **Create swap volume (20 GiB, adjust based on your requirements; should be at least the size of your RAM if you intend to use hibernation):**
@@ -290,20 +276,13 @@ mount /dev/vg0/nixos-root /mnt
 **Create Necessary Directories on the Root Filesystem:**
 
 ```bash
-mkdir -p /mnt/boot /mnt/home
+mkdir /mnt/boot /mnt/home
 ```
 
 **Mount Boot Partition:**
 
 ```bash
-mount /dev/nvme0n1p2 /mnt/boot
-```
-
-**Create Directory for EFI System Partition and Mount It:**
-
-```bash
-mkdir -p /mnt/boot/efi
-mount /dev/nvme0n1p1 /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot
 ```
 
 **Mount Home Partition (if separate):**
@@ -394,10 +373,8 @@ swapon /dev/vg0/nixos-swap
    - **Mount partitions:**
      ```sh
      mount /dev/vg0/nixos-root /mnt
-     mkdir -p /mnt/boot /mnt/home
-     mount /dev/nvme0n1p2 /mnt/boot
-     mkdir -p /mnt/boot/efi
-     mount /dev/nvme0n1p1 /mnt/boot/efi
+     mkdir /mnt/boot /mnt/home
+     mount /dev/nvme0n1p1 /mnt/boot
      mount /dev/vg0/nixos-home /mnt/home
      swapon /dev/vg0/nixos-swap
      ```
