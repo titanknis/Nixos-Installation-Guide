@@ -169,10 +169,10 @@ For other layouts like French or German:
 
      This sets up a 1 GiB partition formatted as FAT32 for the EFI system. It’s required for UEFI booting.
 
-   - **Create the LUKS encrypted partition (2 GiB to end - 1 MiB):**
+   - **Create the LUKS encrypted partition (1 GiB to end - 1 MiB):**
 
      ```sh
-     (parted) mkpart LUKS 2GiB -1MiB
+     (parted) mkpart LUKS 1GiB -1MiB
      ```
 
      This creates the remaining space on the disk for LUKS encryption.
@@ -199,16 +199,16 @@ For other layouts like French or German:
 mkfs.fat -F32 -n ESP /dev/nvme0n1p1
 ```
 
-**Initialize the LUKS encrypted partition (2 GiB to end - 1 MiB):**
+**Initialize the LUKS encrypted partition (1 GiB to end - 1 MiB):**
 
 ```bash
-cryptsetup luksFormat /dev/nvme0n1p3
+cryptsetup luksFormat /dev/nvme0n1p2
 ```
 
 **Open the LUKS partition:**
 
 ```bash
-cryptsetup open /dev/nvme0n1p3 luksCrypted
+cryptsetup open /dev/nvme0n1p2 luksCrypted
 ```
 
 **Create LVM physical volume on the decrypted partition:**
@@ -361,7 +361,7 @@ swapon /dev/vg0/nixos-swap
 2. **If partitions are already present, properly formatted, and contain an almost fully functional system:**
    - **Open LUKS encrypted partitions:**
      ```sh
-     cryptsetup open /dev/nvme0n1p3 luksCrypted
+     cryptsetup open /dev/nvme0n1p2 luksCrypted
      ```
 
    - **Activate all LVM volume groups:**
