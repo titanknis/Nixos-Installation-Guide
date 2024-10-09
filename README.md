@@ -8,12 +8,13 @@
    - [Installation Media](#installation-media)
    - [System Configuration](#system-configuration)
 3. [Installation Process](#installation-process)
+   - [Change keyboard layout](#change-keyboard-layout)
    - [Connect to WiFi](#connect-to-wifi)
    - [Partition the Disk Using `parted`](#partition-the-disk-using-parted)
    - [Format Partitions](#format-partitions)
    - [Mount Partitions](#mount-partitions)
    - [Generate NixOS Configuration and Install](#generate-nixos-configuration-and-install)
-4. [Troubleshooting](#troubleshooting)
+5. [Troubleshooting](#troubleshooting)
 
 
 ---
@@ -97,7 +98,17 @@ Once in the menu:
 ---
 
 ## Installation Process
+### Change keyboard layout
+**Note:** I will be using `colemak-dh`. You can choose other layouts, like `fr` or `de`.
 
+The **US layout** is chosen by default.
+```sh
+sudo loadkeys colemak-dh
+```
+
+For other layouts like French or German:
+- **French**: `sudo loadkeys fr`
+- **German**: `sudo loadkeys de`
 ### Connect to WiFi
 
 1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
