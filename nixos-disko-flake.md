@@ -137,58 +137,43 @@ For other layouts like French or German:
    ```
 
 ---
-
+### Clone you configuration flake
+```sh
+nix-shell -p git
+```
+```sh
+cd
+git clone https://github.com/titanknis/nixos.git
+```
+---
 ### Partition the Disk Using `disko`
 
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
+```sh
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/nixos/nixos/disko.nix
+```
 
-
-
-### 5. Generate NixOS Configuration and Install
-
-1. **Generate the NixOS configuration:**
+3. **Change to the configuration directory and edit the configuration file using `nvim` or nano or whatever your poison might be:**
    ```sh
-   nixos-generate-config --root /mnt
-   ```
-
-2. **Optionally, Download Your Configuration File:**
-
-   If you don’t have your own configuration file, you can download mine for reference:
-   ```sh
-   curl -o /mnt/etc/nixos/configuration.nix https://raw.githubusercontent.com/titanknis/Nixos-Installation-Guide/main/configuration.nix
-   ```
-
-   **Note:** This file is customized for my setup. Common changes you might need to make include:
-   - **Updating Partition UUIDs or Paths**
-   - **Activating or Deactivating Services**
-   - **Installing or Removing Applications**
-   - **Configuring Desktop Environment** (if needed)
-
-   For creating your own configuration, follow these steps:
-   1. **Learn the Basics:** Begin with the [Nix Language Tutorial](https://nix.dev/tutorials/nix-language.html "Nix.dev official Nix language basics") to understand the fundamentals of Nix.
-   2. **Consult the Manual:** Read the relevant sections of the [NixOS Official Manual](https://nixos.org/manual/nixos/stable/ "The official NixOS Manual for the stable channel") for information specific to your setup.
-   3. **Refer to My Configuration File:** You can view [my configuration file](https://github.com/titanknis/Nixos-Installation-Guide/blob/main/configuration.nix "I hope you find this as helpful as I found others' configs. Take whatever you need from it."). It’s thoroughly commented to guide you through the setup. Feel free to adapt it to suit your own needs.
-
-   **Further Learning:**
-
-   After you’ve settled in with NixOS and feel comfortable with the basics, consider exploring the [Nix Pills](https://nixos.org/guides/nix-pills/ "The Nix Pills are considered a classic introduction to Nix") series. These bite-sized tutorials can help you gradually deepen your understanding of Nix concepts. Don’t worry about tackling them right away—they’ll be there when you’re ready to learn more advanced topics.
-
-   **Remember:** Mastering NixOS is a journey. Take your time to understand each concept thoroughly before moving on to more advanced topics.
-
-3. **Change to the configuration directory and edit the configuration file using `vim` or nano or whatever your poison might be:**
-   ```sh
-   cd /mnt/etc/nixos
-   vim configuration.nix
+   cd ~/nixos
+   nvim configuration.nix
    ```
 
    Make necessary changes to match your setup.
-
-4. **Install NixOS:**
+4. **Check if you flake is valid:**
    ```sh
-   nixos-install
+   cd ~/nixos
+   nix --experimental-features "nix-command flakes" flake check
    ```
+   **Note:** if all went well you wont see an error message.
 
-5. **Reboot the system:**
+5. **Install NixOS:**
+   ```sh
+   nixos-install --flake ~/nixos/#mysystem
+   ```
+   **Note:** you will be prompted for both luks encryption password and root user password
+
+6. **Reboot the system:**
    ```sh
    reboot
    ```
