@@ -144,6 +144,7 @@ nix-shell -p git
 ```sh
 cd
 git clone https://github.com/titanknis/nixos.git
+exit
 ```
 ---
 ### Partition the Disk Using `disko`
