@@ -10,11 +10,8 @@
 3. [Installation Process](#installation-process)
    - [Change keyboard layout](#change-keyboard-layout)
    - [Connect to WiFi](#connect-to-wifi)
-   - [Partition the Disk Using `parted`](#partition-the-disk-using-parted)
-   - [Format Partitions](#format-partitions)
-   - [Mount Partitions](#mount-partitions)
-   - [Generate NixOS Configuration and Install](#generate-nixos-configuration-and-install)
-5. [Troubleshooting](#troubleshooting)
+   - [Partition the Disk Using `disko`](#partition-the-disk-using-disko)
+
 
 
 ---
@@ -154,10 +151,10 @@ exit
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/nixos/nixos/disko.nix
 ```
 
-3. **Change to the configuration directory and edit the configuration file using `nvim` or nano or whatever your poison might be:**
+3. **Change to the configuration directory and edit your configuration files using `nvim` or nano or whatever your poison might be:**
    ```sh
    cd ~/nixos
-   nvim configuration.nix
+   nvim flake.nix
    ```
 
    Make necessary changes to match your setup.
@@ -168,13 +165,12 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
    ```
    **Note:** if all went well you wont see an error message.
 
-5. **Install NixOS:**
+### Install NixOS
    ```sh
    nixos-install --flake ~/nixos/#mysystem
    ```
    **Note:** you will be prompted for both luks encryption password and root user password
 
-6. **Reboot the system:**
    ```sh
    reboot
    ```
