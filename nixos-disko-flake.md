@@ -23,7 +23,7 @@
 - **LVM disk partitioning** for flexibility in storage management.
 - **LUKS encryption** for the entire LVM physical volume for security.
 - **UEFI boot loader** and **boot partition**.
-- **Unencrypted boot partition** to allow bootloader to access its files, especially themes.
+- **Unencrypted boot partition** to allow the bootloader to access its files.
 - **USB stick installation**.
 - **Connecting to the internet using WiFi** (specifically WPA) instead of Ethernet.
 - **Full disk installation only**; no dual boot.
