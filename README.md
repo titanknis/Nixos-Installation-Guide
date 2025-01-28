@@ -347,4 +347,3 @@ swapon /dev/vg0/nixos-swap
    reboot
    ```
 
----
