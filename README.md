@@ -14,7 +14,6 @@
    - [Format Partitions](#format-partitions)
    - [Mount Partitions](#mount-partitions)
    - [Generate NixOS Configuration and Install](#generate-nixos-configuration-and-install)
-5. [Troubleshooting](#troubleshooting)
 
 
 ---
