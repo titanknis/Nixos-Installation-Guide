@@ -148,8 +148,10 @@ exit
 
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
 ```sh
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ~/nixos/nixos/disko.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/nixos/modules/nixos/disko.nix
 ```
+*Note: Replace `~/nixos/modules/nixos/disko.nix` with the path to your own disko configuration file if it's different.*
+
 
 3. **Change to the configuration directory and edit your configuration files using `nvim` or nano or whatever your poison might be:**
    ```sh
