@@ -169,9 +169,9 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 
 ### Install NixOS
    ```sh
-   nixos-install --flake ~/nixos/#mysystem
+   nixos-install --flake ~/nixos/#default
    ```
-   **Note:** you will be prompted for both luks encryption password and root user password
+   **Note:** you will be prompted to set the root user password
 
    ```sh
    reboot
