@@ -160,7 +160,7 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
    ```
 
    Make necessary changes to match your setup.
-4. **Check if you flake is valid:**
+4. **Check if your flake is valid:**
    ```sh
    cd ~/nixos
    nix --experimental-features "nix-command flakes" flake check
