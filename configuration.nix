@@ -28,7 +28,6 @@
   boot.loader.grub.copyKernels = true;  # Activate automatic copying of kernel files
   boot.loader.grub.efiSupport = true;  # Enable EFI support for GRUB
   boot.loader.grub.enableCryptodisk = true ; # Enable GRUB support for encrypted disks
-  # themes = [ "/boot/grub/themes/your-theme" ]; # Path to your GRUB theme
   boot.loader.efi.efiSysMountPoint = "/boot/efi";  # Mount point of the EFI system partition
   boot.loader.efi.canTouchEfiVariables = true;  # Allow GRUB to modify EFI variables for boot entry management
   
@@ -143,8 +142,6 @@
     wget # wget is better than curl because it will resume with exponential backoff
     curl # curl is better than wget because it supports more protocols
     git # git version control
-    #btrfs-progs # package for the btrfs filesystem
-    sleek-grub-theme
   ];
 
 
