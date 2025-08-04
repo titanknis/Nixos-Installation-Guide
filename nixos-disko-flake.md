@@ -1,4 +1,3 @@
-
 # NixOS Installation Guide
 
 **Table of Contents:**
@@ -11,8 +10,6 @@
    - [Change keyboard layout](#change-keyboard-layout)
    - [Connect to WiFi](#connect-to-wifi)
    - [Partition the Disk Using `disko`](#partition-the-disk-using-disko)
-
-
 
 ---
 
@@ -32,6 +29,7 @@
 By following this guide, you will have a secure NixOS system with encrypted storage and LVM management, tailored to your specific hardware and preferences.
 
 **Important:** All commands should be executed as the root user. To gain root access, use:
+
 ```sh
 sudo -i
 ```
@@ -49,7 +47,6 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
 1. **Download the 64-bit minimal install CD** from the [NixOS downloads page](https://nixos.org/download.html "Obviously the official download page").
 
 2. **Verify the ISO Integrity**
-
    - Download the SHA256 checksum file from the same page.
    - Place both the ISO and checksum file in the same folder.
    - Run:
@@ -61,23 +58,19 @@ I won’t be covering Nix language fundamentals in this guide. If you have a bas
    - Ensure the output indicates that the ISO file is `OK`. If the verification fails, redownload the ISO and checksum files and repeat the verification process.
 
 3. **Create a Bootable USB Stick**
+   1. Identify your USB stick:
 
-   - Consider using [Ventoy](https://www.ventoy.net/en/index.html "Simply install Ventoy on your USB drive and copy any number of ISO files to it. You can then easily boot from any of them.") for flexibility.
-   - Alternatively, use the command line:
+      ```sh
+      lsblk
+      ```
 
-     1. Identify your USB stick:
+   2. Copy the ISO to the USB stick (replace `$DISK` with your USB stick):
 
-        ```sh
-        lsblk
-        ```
+      ```sh
+      sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
+      ```
 
-     2. Copy the ISO to the USB stick (replace `$DISK` with your USB stick):
-
-        ```sh
-        sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
-        ```
-
-        **Note:** This command will erase all data on the USB stick. Replace `<ISO_FILE>` with the name of your ISO file.
+      **Note:** This command will erase all data on the USB stick. Replace `<ISO_FILE>` with the name of your ISO file.
 
 ---
 
@@ -95,26 +88,33 @@ Once in the menu:
 ---
 
 ## Installation Process
+
 ### Change keyboard layout
+
 **Note:** I will be using `colemak-dh`. You can choose other layouts, like `fr` or `de`.
 
 The **US layout** is chosen by default.
+
 ```sh
 sudo loadkeys mod-dh-ansi-us
 ```
 
 For other layouts like French or German:
+
 - **French**: `sudo loadkeys fr`
 - **German**: `sudo loadkeys de`
+
 ### Connect to WiFi
 
 1. **Start `wpa_supplicant` and configure WiFi with `wpa_cli`:**
+
    ```sh
    sudo systemctl start wpa_supplicant
    wpa_cli
    ```
 
    Inside `wpa_cli`, enter:
+
    ```sh
    add_network
    0
@@ -129,37 +129,46 @@ For other layouts like French or German:
    ```
 
    Then, exit `wpa_cli`:
+
    ```sh
    quit
    ```
 
 ---
+
 ### Clone you configuration flake
+
 ```sh
 nix-shell -p git
 ```
+
 ```sh
 cd
 git clone https://github.com/titanknis/nixos.git
 exit
 ```
+
 ---
+
 ### Partition the Disk Using `disko`
 
 **Warning:** Partitioning will erase all data on the disk. Ensure you have backed up any important data before proceeding.
+
 ```sh
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode destroy,format,mount ~/nixos/modules/disko.nix
 ```
-*Note: Replace `~/nixos/modules/nixos/disko.nix` with the path to your own disko configuration file if it's different.*
 
+_Note: Replace `~/nixos/modules/nixos/disko.nix` with the path to your own disko configuration file if it's different._
 
 3. **Change to the configuration directory and edit your configuration files using `nvim` or nano or whatever your poison might be:**
+
    ```sh
    cd ~/nixos
    nvim flake.nix
    ```
 
    Make necessary changes to match your setup.
+
 4. **Check if your flake is valid:**
    ```sh
    cd ~/nixos
@@ -168,13 +177,15 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
    **Note:** if all went well you wont see an error message.
 
 ### Install NixOS
-   ```sh
-   nixos-install --flake ~/nixos/#default
-   ```
-   **Note:** you will be prompted to set the root user password
 
-   ```sh
-   reboot
-   ```
+```sh
+nixos-install --flake ~/nixos/#default
+```
+
+**Note:** you will be prompted to set the root user password
+
+```sh
+reboot
+```
 
 ---
