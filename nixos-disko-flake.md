@@ -169,13 +169,6 @@ _Note: Replace `~/nixos/modules/nixos/disko.nix` with the path to your own disko
 
    Make necessary changes to match your setup.
 
-4. **Check if your flake is valid:**
-   ```sh
-   cd ~/nixos
-   nix --experimental-features "nix-command flakes" flake check
-   ```
-   **Note:** if all went well you wont see an error message.
-
 ### Install NixOS
 
 ```sh
